@@ -93,6 +93,13 @@ body {
   font-size: 1.8rem;
 }
 
+.brand-suffix {
+  font-size: 0.55em;
+  font-weight: 500;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
 .subtitle {
   margin: 0;
   font-size: 0.95rem;

@@ -181,7 +181,7 @@ function App() {
           <div className="title-block">
             <img src={logo} alt={t("app.logo_alt")} className="logo" />
             <div>
-              <h1 className="title">iloader</h1>
+              <h1 className="title">iloader <span className="brand-suffix">for HermesEnabler</span></h1>
               <p className="subtitle">{t("subtitle")}</p>
             </div>
           </div>

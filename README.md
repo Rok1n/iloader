@@ -1,21 +1,11 @@
 > [!IMPORTANT]
-> **This is an unofficial fork of [iloader](https://github.com/nab138/iloader) by nab138.**
-> It is not affiliated with or endorsed by the original author. The official
-> project is at [iloader.app](https://iloader.app).
+> **iloader for HermesEnabler**：面向 HermesEnabler 使用场景的 Windows 定制版 iloader（非官方）。
+> 基于 [iloader](https://github.com/nab138/iloader)，增加 Apple Watch 伴随应用的 App Group 配置支持，并提供 Wi-Fi 安装、自动续签等功能。
+> 本分支与 iloader 原作者或 HermesEnabler 项目不存在官方关联；官方 iloader 请访问 [iloader.app](https://iloader.app)。
+> [下载本分支](../../releases) · [构建说明](BUILDING.md)。本分支的数据和保存的密码与官方版本独立；问题请在本仓库反馈。
 >
-> The fork adds, for **Windows**:
-> - **Apple Watch companion apps:** apps that contain a Watch app are installed
->   on the paired Apple Watch too, over USB or Wi-Fi.
-> - **Wi-Fi setup and installs:** set a phone up once over USB (**Set up Wi-Fi**),
->   then install and renew over the local network without a cable.
-> - **Automatic renewal** of iPhone apps with saved accounts, before their 7-day
->   signature expires, with tray controls and optional Windows startup. See
->   [automatic renewal](docs/automatic-renewal.md).
->
-> Download it from this fork's [releases](../../releases). It keeps its own data
-> and saved passwords, separate from the official iloader. Report problems with
-> the fork here, not to the original project. Building: [BUILDING.md](BUILDING.md).
-> The original README follows, kept for attribution.
+> 以下保留原版 README，以注明来源及相关作者。
+
 <a href="https://iloader.app">
   <picture align="left" >
     <source media="(prefers-color-scheme: dark)" srcset="/iloader.svg">
