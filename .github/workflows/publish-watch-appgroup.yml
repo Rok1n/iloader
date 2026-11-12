@@ -1,0 +1,53 @@
+name: Publish Watch App Group Windows release
+
+on:
+  push:
+    paths:
+      - .github/workflows/publish-watch-appgroup.yml
+  workflow_dispatch:
+
+permissions:
+  actions: read
+  contents: write
+
+jobs:
+  publish:
+    if: github.repository == 'Rok1n/iloader'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download verified Windows build
+        uses: actions/download-artifact@v4
+        with:
+          name: iloader-windows
+          run-id: 43156081533
+          github-token: ${{ github.token }}
+          path: release-assets
+
+      - name: Verify source commit and SHA256 checksums
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(jq -r '.sourceCommit' release-assets/BUILD.json)" = "2d9e576abf86d8eb968bbbe360afbac9a5cb9ba6"
+          test "$(jq -r '.sourceDirty' release-assets/BUILD.json)" = "false"
+          test -s release-assets/iloader.exe
+          (cd release-assets && sha256sum --check SHA256SUMS.txt)
+
+      - name: Publish release with executable and provenance
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          tag="watch-appgroup-2d9e576"
+          if gh release view "$tag" --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
+            echo "Release $tag already exists, skipping."
+            exit 0
+          fi
+          gh release create "$tag" \
+            release-assets/iloader.exe \
+            release-assets/BUILD.json \
+            release-assets/SHA256SUMS.txt \
+            --repo "$GITHUB_REPOSITORY" \
+            --target "2d9e576abf86d8eb968bbbe360afbac9a5cb9ba6" \
+            --title "iloader Windows - Watch App Group support" \
+            --notes "Windows build from commit 2d9e576abf86d8eb968bbbe360afbac9a5cb9ba6. Watch bundle IDs are configured with the App Group feature; watchOS provisioning profiles remain unchanged. Binary provenance: BUILD.json and SHA256SUMS.txt."
